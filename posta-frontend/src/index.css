@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#loginNav, #logoutNav, #login{
+    background: linear-gradient(
+        120deg,
+        #ed1d23 25%,
+        #ff7e29 25% 50%,
+        #fff200 50% 75%,
+        #3e47cc 75% 100%
+    );
+}
