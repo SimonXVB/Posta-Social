@@ -12,7 +12,7 @@ export function Comments() {
     const { deleteComment } = useDeleteComment();
     const { currentUser } = useContext(CurrentUserContext);
 
-    async function deleteFunc(postId, userId) {
+    async function deleteFunction(postId, userId) {
         await deleteComment(postId, userId);
         await fetchComments(params.userId);
     };
@@ -25,12 +25,12 @@ export function Comments() {
     return (
         <>
         {!commentsLoading && 
-            <div className="text-white flex flex-col">
+            <>
                 {comments.length === 0 && <div className="text-center py-5 text-3xl font-bold">User has no comments</div>}
                 {comments?.map((comment) => (
-                    <Comment currentUser={currentUser} comment={comment} deleteComment={deleteFunc} key={comment.id}/>
+                    <Comment currentUser={currentUser} comment={comment} deleteComment={deleteFunction} key={comment.id}/>
                 ))}
-            </div>
+            </>
         }
         </>
     )

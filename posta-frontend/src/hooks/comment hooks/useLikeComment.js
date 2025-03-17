@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useLikeComment() {
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError } = useContext(GlobalPopupContext);
 
     async function likeComment(userId, commentId) {
         try {

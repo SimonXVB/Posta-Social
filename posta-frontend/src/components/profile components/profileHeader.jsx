@@ -1,10 +1,8 @@
 import { useContext, useState } from "react";
 import { useFollow } from "../../hooks/follow hooks/useFollow";
 import { CurrentUserContext } from "../../context/currentUserContext";
-import { EditProfileModal } from "./profileEditModal";
 
-export function ProfileHeader({ user }) {
-    const [editModal, setEditModal] = useState(false);
+export function ProfileHeader({ user, setEditModal }) {
     const [isFollowing, setIsFollowing] = useState(user.isFollowing)
 
     const { currentUser } = useContext(CurrentUserContext);
@@ -25,31 +23,31 @@ export function ProfileHeader({ user }) {
         <>
             {user &&
                 <>
-                    <div className="flex mb-5">
-                        <div className="w-1/2 text-xl font-bold p-3 text-white">
-                            <p>{"@" + user.username}</p>
+                    <div className="flex items-center mx-4 pb-2">
+                        <div className="w-1/2 text-2xl font-bold text-white">
+                            <p>{user.username}</p>
                         </div>
-                        <div className="w-1/2 text-right *:p-3 *:text-xl *:font-bold *:hover:bg-gray-400 *:border-4 border-white text-white">
-                            {currentUser && 
+                        <div className="w-1/2 text-right *:px-4 *:py-2 *:text-xl *:font-bold *:rounded-full *:underline text-white">
+                            {currentUser &&
                                 <>
-                                    {currentUser.id === user.id && <button onClick={() => setEditModal(true)}>Edit</button>}
+                                    {currentUser.id === user.id && <button onClick={() => setEditModal(true)} className="hover:bg-gray-300/30">Edit</button>}
                                     {currentUser.id !== user.id &&
                                         <>
-                                            {!isFollowing && <button onClick={() => followUser(currentUser.id, user.id)}>Follow</button>}
-                                            {isFollowing && <button onClick={() => unfollowUser(currentUser.id, user.id)}>Unfollow</button>}
+                                            {!isFollowing && <button onClick={() => followUser(currentUser.id, user.id)} className="hover:bg-gray-300/30">Follow</button>}
+                                            {isFollowing && <button onClick={() => unfollowUser(currentUser.id, user.id)} className="hover:bg-gray-300/30">Unfollow</button>}
                                         </>
                                     }
                                 </>
                             }
                         </div>
                     </div>
-                    <div className="my-6 pl-3 break-words text-white">
+                    <div className="bg-gradient-to-r from-blue-500 to-red-500 h-1 mx-4"></div>
+                    <div className="my-6 px-4 break-words text-white">
                         <p className="font-bold">Bio:</p>
-                        <p>{user.bio || "---"}</p>
+                        <p>{user.bio}</p>
                     </div>
                 </>
             }
-            {editModal && <EditProfileModal setEditModal={setEditModal}/>}
         </>
     );
 }

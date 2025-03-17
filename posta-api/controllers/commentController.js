@@ -9,6 +9,10 @@ async function createComment(req, res) {
             return res.status(400).json("empty");
         };
 
+        if(content.length > 150) {
+            return res.status(400).json("length");
+        };
+
         await commentQueries.createCommentDB(content, userId, postId);
 
         return res.status(201).json("created");

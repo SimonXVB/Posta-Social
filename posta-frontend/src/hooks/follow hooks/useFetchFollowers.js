@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useFetchFollowers() {
     const [followers, setFollowers] = useState(null);
     const [followersLoading, setFollowersLoading] = useState(true);
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError } = useContext(GlobalPopupContext);
 
     async function fetchFollowers(userId) {
         try {

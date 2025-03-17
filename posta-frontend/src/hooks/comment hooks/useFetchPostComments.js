@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useFetchPostComments() {
     const [comments, setComments] = useState(null);
     const [commentsLoading, setCommentsLoading] = useState(true);
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError } = useContext(GlobalPopupContext);
 
     async function fetchPostComments(postId) {
         try {

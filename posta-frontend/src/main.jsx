@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client'
 import { Router } from './router'
-import { GlobalError } from './context/globalErrorContext';
+import { GlobalPopup } from './context/globalPopupContext';
 
 createRoot(document.getElementById('root')).render(
-  <GlobalError>
-      <Router />
-  </GlobalError>
+    <GlobalPopup>
+        <Router />
+    </GlobalPopup>
 );

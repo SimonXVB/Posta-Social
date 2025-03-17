@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useFollow() {
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError, setSuccess } = useContext(GlobalPopupContext);
 
     async function follow(currentUserId, followUserId) {
         try {
@@ -22,6 +22,8 @@ export function useFollow() {
             if(json === "internalError") {
                 setError(json);
             };
+
+            setSuccess("followedUser");
         } catch (error) {
             console.error(error);
             setError("fetchError");
@@ -46,6 +48,8 @@ export function useFollow() {
             if(json === "internalError") {
                 setError(json);
             };
+
+            setSuccess("unfollowedUser");
         } catch (error) {
             console.error(error);
             setError("fetchError");

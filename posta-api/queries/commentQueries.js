@@ -89,6 +89,7 @@ async function getCommentsDB(userId) {
                         content: true,
                         id: true,
                         postId: true,
+                        date: true,
                         author: {
                             select: {
                                 username: true,
@@ -112,7 +113,7 @@ async function getCommentsDB(userId) {
     } catch (error) {
         console.log(error);
         throw error;
-    }  
+    }
 };
 
 async function getPostCommentsDB(postId) {
@@ -127,6 +128,7 @@ async function getPostCommentsDB(postId) {
                         content: true,
                         id: true,
                         postId: true,
+                        date: true,
                         author: {
                             select: {
                                 username: true,

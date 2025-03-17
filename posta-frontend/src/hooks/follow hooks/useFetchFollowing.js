@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useFetchFollowing() {
     const [following, setFollowing] = useState(null);
     const [followingLoading, setFollowingLoading] = useState(true);
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError } = useContext(GlobalPopupContext);
 
     async function fetchFollowing(userId) {
         try {

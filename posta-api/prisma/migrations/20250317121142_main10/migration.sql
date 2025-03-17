@@ -1,0 +1,3 @@
+-- AlterTable
+CREATE EXTENSION citext;
+ALTER TABLE "User" ALTER COLUMN "username" SET DATA TYPE CITEXT;

@@ -1,13 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-#loginNav, #logoutNav, #login{
-    background: linear-gradient(
-        120deg,
-        #ed1d23 25%,
-        #ff7e29 25% 50%,
-        #fff200 50% 75%,
-        #3e47cc 75% 100%
-    );
+body {
+    margin: 0;
+    background-color: #181818;
+    font-family: Roboto, sans-serif;
+    color: white;
+}
+
+#border {
+    position: relative;
+    border-inline: 4px solid;
+    border-color: transparent #EF4444 transparent #3B82F6;
+    box-shadow: 
+    10px 0px 12px 0px #EF4444,
+    -10px 0px 12px 0px #3B82F6;
+}
+
+#popup {
+    animation: slide-in 100ms;
+}
+
+#modal {
+    animation: pop-in 150ms;
+}
+
+@keyframes pop-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        right: -100%;
+    }
+    to {
+        right: 16px;
+    }
 }

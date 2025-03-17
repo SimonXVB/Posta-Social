@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useFetchUser() {
     const [user, setUser] = useState(null);
     const [userLoading, setUserLoading] = useState(true);
+
+    const { setError } = useContext(GlobalPopupContext);
     const nav = useNavigate();
-    const { setError } = useContext(GlobalErrorContext);
 
     async function fetchUser(userId) {
         try {
@@ -26,12 +27,12 @@ export function useFetchUser() {
                 setUserLoading(false);
             } else {
                 nav("/notFound");
-            };   
+            };
         } catch (error) {
             console.error(error);
             setError("fetchError");
         };
     };
 
-    return { fetchUser, user, userLoading };
+    return { fetchUser, setUserLoading, user, userLoading };
 };

@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useFetchCurrentUser() {
     const [currentUser, setCurrentUser] = useState(null);
     const [currentUserLoading, setCurrentUserLoading] = useState(true);
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError } = useContext(GlobalPopupContext);
 
     async function fetchCurrentUser() {
         try {
@@ -16,6 +16,7 @@ export function useFetchCurrentUser() {
 
             if(json === "internalError") {
                 setError(json);
+                setCurrentUserLoading(false);
                 return;
             };
     
@@ -24,7 +25,7 @@ export function useFetchCurrentUser() {
                 setCurrentUserLoading(false);
             } else {
                 setCurrentUserLoading(false);
-            };   
+            };
         } catch (error) {
             console.error(error);
             setError("fetchError");

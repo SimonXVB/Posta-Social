@@ -11,7 +11,9 @@ async function createUserDB(username, password) {
             }
         });
     } catch (error) {
-        console.log(error);
+        if(error.code !== "P2002") {
+            console.log(error);
+        };
         throw error;
     }
 };
@@ -28,7 +30,9 @@ async function updateUserDB(userId, newUsername, bio) {
             }
         });
     } catch (error) {
-        console.log(error);
+        if(error.code !== "P2002") {
+            console.log(error);
+        };
         throw error;
     }
 };

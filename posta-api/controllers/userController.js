@@ -10,12 +10,20 @@ async function createUser(req, res) {
             return res.status(400).json("empty");
         };
 
+        if(username.length >= 25) {
+            return res.status(400).json("length");
+        };
+
         const hash = bcrypt.hashSync(password, 15);
 
         await userQueries.createUserDB(username, hash);
 
         return res.status(201).json("created");
     } catch (error) {
+        if(error.code === "P2002") {
+            return res.status(400).json("existsError");
+        };
+
         console.error(error);
         return res.status(500).json("internalError");
     };
@@ -29,10 +37,19 @@ async function updateUser(req, res) {
             return res.status(400).json("empty");
         };
 
+        if(newUsername.length > 25 || bio.length > 50) {
+            return res.status(400).json("length");
+        };
+
         await userQueries.updateUserDB(userId, newUsername, bio);
 
         return res.status(200).json("updated");
     } catch (error) {
+
+        if(error.code === "P2002") {
+            return res.status(400).json("existsError");
+        };
+        
         console.error(error);
         return res.status(500).json("internalError");
     }
@@ -83,7 +100,7 @@ async function getCurrentUser(req, res) {
         };
     } catch (error) {
         console.error(error);
-        return res.status(200).json("internalError");
+        return res.status(500).json("internalError");
     }
 };
 
@@ -117,7 +134,7 @@ async function getAllUsers(req, res) {
         return res.status(200).json(newUsers);
     } catch (error) {
         console.error(error);
-        return res.status(200).json("internalError");
+        return res.status(500).json("internalError");
     }  
 };
 
@@ -135,7 +152,7 @@ async function login(req, res) {
             return res.status(400).json("noUserError");
         };
 
-        if(user.username === username && bcrypt.compareSync(password, user.password)) {
+        if(user.username.toLowerCase() === username.toLowerCase() && bcrypt.compareSync(password, user.password)) {
             const token = jwt.sign(
                 {userId: user.id},
                 process.env.SECRET,

@@ -25,12 +25,12 @@ export function LikedPosts() {
     return (
         <>
         {!postLikesLoading && 
-            <div className="text-white flex flex-col">
+            <>
                 {postLikes.length === 0 && <div className="text-center py-5 text-3xl font-bold">User has no likes</div>}
                 {postLikes?.map((like) => (
                     <Post currentUser={currentUser} post={like} deletePost={() => deleteFunction(like.id, currentUser.id)} key={like.id}/>
                 ))}
-            </div>
+            </>
         }
         </>
     )

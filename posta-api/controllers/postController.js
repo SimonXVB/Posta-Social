@@ -9,6 +9,10 @@ async function createPost(req, res) {
             return res.status(400).json("empty");
         };
 
+        if(content.length > 150) {
+            return res.status(400).json("length");
+        };
+
         await postQueries.createPostDB(content, userId);
 
         return res.status(201).json("created");
@@ -67,7 +71,7 @@ async function getPosts(req, res) {
         return res.status(200).json(checkedPosts);
     } catch (error) {
         console.error(error);
-        return res.status(200).json("internalError");
+        return res.status(500).json("internalError");
     }
 };
 
@@ -81,7 +85,7 @@ async function getFollowingPosts(req, res) {
         return res.status(200).json(checkedPosts);
     } catch (error) {
         console.error(error);
-        return res.status(200).json("internalError");
+        return res.status(500).json("internalError");
     }  
 };
 
@@ -92,7 +96,7 @@ async function getLogoutPosts(req, res) {
         return res.status(200).json(posts);
     } catch (error) {
         console.error(error);
-        return res.status(200).json("internalError");
+        return res.status(500).json("internalError");
     }  
 };
 
@@ -106,7 +110,7 @@ async function getPost(req, res) {
         return res.status(200).json(checkedPost);
     } catch (error) {
         console.error(error);
-        return res.status(200).json("internalError");
+        return res.status(500).json("internalError");
     }  
 };
 
@@ -120,12 +124,11 @@ async function getLikedPosts(req, res) {
         return res.status(200).json(checkedPostLikes);
     } catch (error) {
         console.error(error);
-        return res.status(200).json("internalError");
+        return res.status(500).json("internalError");
     }  
 };
 
 async function checkPostLikes(req, posts) {
-
     try {
         const currentUser = await returnCurrentUser(req);
 

@@ -1,22 +1,48 @@
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
+import { useState } from "react";
 
 export function LogoutNav() {
-    const loc = useLocation();
+    const [menu, setMenu] = useState(false);
 
     return (
-        <>
-        {loc.pathname !== "/login" &&
-            <div className="flex justify-center">
-                <nav className="flex justify-between font-black text-2xl sticky py-3 top-0 px-5 max-w-455 w-full border-x-4 border-white" id="logoutNav">
-                    <Link to={"/"} className="text-black">
-                        Posta
-                    </Link>
-                    <Link to={"/login"} className="flex justify-center items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/></svg>
-                    </Link>
-                </nav>
+        <div className="flex justify-center">
+            <div className="relative flex justify-between py-3 top-0 px-5 w-full">
+                <Link to={"/"} className="text-black hover:bg-gray-300/30 rounded-full">
+                        <img src="/src/assets/posta-logo.png" alt="Posta-Logo" className="h-10 rounded-full"/>
+                </Link>
+                <button className="hidden max-[960px]:block hover:bg-gray-300/30 rounded-full" onClick={() => setMenu(true)}>
+                    <img src="/src/assets/menu.png" alt="menu" className="h-10"/>
+                </button>
             </div>
-        }
-        </>
+            <nav className="absolute translate-x-[380px] translate-y-10 max-[960px]:hidden">
+                <Link to={"/login"} onClick={() => setMenu(false)} className="flex justify-between items-center py-2 px-6 rounded-full hover:bg-gray-300/30">
+                    <p className="text-xl mr-6">Login</p>
+                    <img src="/src/assets/login.png" alt="profile" className="h-8"/>
+                </Link>
+                <a href="https://github.com/SimonXVB/Posta-Social" target="_blank" className="flex justify-between items-center my-5 py-2 px-6 rounded-full hover:bg-gray-300/30">
+                    <p className="text-xl mr-6">GitHub</p>
+                    <img src="/src/assets/github.png" alt="Github-Logo" className="h-8"/>
+                </a>
+            </nav>
+            {menu &&
+                <div className="fixed top-0 left-0 flex justify-center items-center w-full h-full z-10 pt-2 bg-gray-300/30" id="modal">
+                    <nav className="flex justify-center items-center flex-col bg-gray-900 py-6 px-9 rounded-lg shadow-lg shadow-red-500">
+                        <div className="w-full flex justify-end mb-5">
+                            <button onClick={() => setMenu(false)} className="hover:bg-gray-300/30 rounded-full">
+                                <img src="/src/assets/close.png" alt="close" className="h-8"/>
+                            </button>
+                        </div>
+                        <Link to={"/login"} onClick={() => setMenu(false)} className="flex justify-between items-center py-2 px-6 bg-red-500 rounded-full hover:bg-gray-200/20">
+                            <p className="text-xl mr-6">Login</p>
+                            <img src="/src/assets/login.png" alt="profile" className="h-8"/>
+                        </Link>
+                        <a href="https://github.com/SimonXVB/Posta-Social" target="_blank" className="flex justify-between items-center my-5 py-2 px-6 bg-yellow-500 rounded-full hover:bg-gray-200/20">
+                            <p className="text-xl mr-6">GitHub</p>
+                            <img src="/src/assets/github.png" alt="Github-Logo" className="h-8"/>
+                        </a>
+                    </nav>
+                </div>
+            }
+        </div>
     )
 };

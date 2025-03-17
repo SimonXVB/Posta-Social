@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useDeleteComment() {
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError, setSuccess } = useContext(GlobalPopupContext);
 
     async function deleteComment(postId, userId) {
         try {
@@ -22,6 +22,8 @@ export function useDeleteComment() {
             if(json === "internalError") {
                 setError(json);
             };
+
+            setSuccess("commentDeleted");
         } catch (error) {
             console.error(error);
             setError("fetchError");

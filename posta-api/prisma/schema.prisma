@@ -9,9 +9,9 @@ datasource db {
 
 model User {
   id            Int       @id @default(autoincrement())
-  username      String    @unique
+  username      String    @unique @db.Citext
   password      String
-  bio           String?
+  bio           String?   @default("---")
   posts         Post[]    @relation("Posts")
   likedPosts    Post[]    @relation("likedPosts")
   comments      Comment[]

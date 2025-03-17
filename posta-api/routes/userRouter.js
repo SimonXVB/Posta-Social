@@ -9,9 +9,10 @@ userRouter.put("/user", auth.bodyAuth, userController.updateUser);
 userRouter.get("/user/:userId", userController.getUser);
 userRouter.get("/user", userController.getCurrentUser);
 userRouter.get("/all", userController.getAllUsers);
-userRouter.delete("/user/:userId", auth.paramsAuth, userController.deleteUser);
 
 userRouter.post("/login", userController.login);
 userRouter.post("/logout", userController.logout);
+
+//userRouter.delete("/user/:userId", auth.paramsAuth, userController.deleteUser);
 
 module.exports = userRouter;

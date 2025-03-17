@@ -6,8 +6,8 @@ import { Profile } from "./pages/profile";
 import { NotFound } from "./pages/notFound";
 import { CurrentPost } from "./pages/currentPost";
 import { CurrentContext } from "./context/currentUserContext";
-import { LoginNav } from "./components/navbar/loginNav";
-import { LogoutNav } from "./components/navbar/logoutNav";
+import { ErrorPopUp } from "./components/individual components/errorPopup";
+import { SuccessPopUp } from "./components/individual components/successPopup";
 import { Home } from "./pages/home";
 
 export function Router() {
@@ -20,21 +20,17 @@ export function Router() {
 
     return (
         <CurrentContext value={{setCurrentUser, fetchCurrentUser, currentUser, currentUserLoading}}>
-                <BrowserRouter>
-                    {currentUser && <LoginNav currentUser={currentUser}/>}
-                    {!currentUser && <LogoutNav />}
-                    <Routes>
-                        {!currentUserLoading &&
-                        <>
-                                <Route path="*" element={<NotFound />}/>
-                                <Route path="/" element={<Home/>}/>
-                                <Route path="/login" element={!currentUser ? <Login /> : <Navigate to={"/"}/>}/>
-                                <Route path="/user/:userId" element={<Profile />}/>
-                                <Route path="/post/:postId" element={<CurrentPost />}/>
-                        </>
-                        }
-                    </Routes>
-                </BrowserRouter>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="*" element={<NotFound />}/>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/login" element={!currentUser ? <Login /> : <Navigate to={"/"}/>}/>
+                    <Route path="/user/:userId" element={<Profile />}/>
+                    <Route path="/post/:postId" element={<CurrentPost />}/>
+                </Routes>
+            </BrowserRouter>
+            <ErrorPopUp/>
+            <SuccessPopUp/>
         </CurrentContext>
     )
 };

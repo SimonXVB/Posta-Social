@@ -1,10 +1,10 @@
 import { useLogin } from "./useLogin";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 import { useContext } from "react";
 
 export function useRegister() {
     const { login } = useLogin();
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError } = useContext(GlobalPopupContext);
 
     async function register(e, username, password) {
         e.preventDefault();
@@ -24,6 +24,16 @@ export function useRegister() {
             const json = await res.json();
 
             if(json === "empty") {
+                setError(json);
+                return true;
+            };
+
+            if(json === "length") {
+                setError(json);
+                return true;
+            };
+            
+            if(json === "existsError") {
                 setError(json);
                 return true;
             };

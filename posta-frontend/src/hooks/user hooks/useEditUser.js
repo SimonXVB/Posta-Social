@@ -1,12 +1,10 @@
 import { useContext } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useEditUser() {
-    const { setError } = useContext(GlobalErrorContext); 
+    const { setError, setSuccess } = useContext(GlobalPopupContext); 
 
-    async function editUser(e, currentUserId, username, bio) {
-        e.preventDefault();
-
+    async function editUser(currentUserId, username, bio) {
         try {
             const res = await fetch(import.meta.env.VITE_BASE_URL + "/user", {
                 method: "PUT",
@@ -27,10 +25,22 @@ export function useEditUser() {
                 return true;
             };
 
+            if(json === "length") {
+                setError(json);
+                return true;
+            };
+
+            if(json === "existsError") {
+                setError(json);
+                return true;
+            };
+
             if(json === "internalError") {
                 setError(json);
                 return true;
             };
+
+            setSuccess("editedUser");
         } catch (error) {
             console.error(error);
             setError("fetchError");

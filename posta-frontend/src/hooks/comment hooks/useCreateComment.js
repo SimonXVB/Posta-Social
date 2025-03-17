@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useCreateComment() {
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError, setSuccess } = useContext(GlobalPopupContext);
 
     async function createComment(e, userId, content, postId) {
         e.preventDefault();
@@ -27,10 +27,17 @@ export function useCreateComment() {
                 return true;
             };
 
+            if(json === "length") {
+                setError(json);
+                return true;
+            };
+
             if(json === "internalError") {
                 setError(json);
                 return true;
             };
+
+            setSuccess("commentCreated");
         } catch (error) {
             console.error(error);
             setError("fetchError");

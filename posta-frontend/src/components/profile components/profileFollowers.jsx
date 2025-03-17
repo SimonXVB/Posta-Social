@@ -3,31 +3,31 @@ import { useFetchFollowers } from "../../hooks/follow hooks/useFetchFollowers";
 import { Link, useParams } from "react-router";
 
 export function Followers() {
-    const parms = useParams();
+    const params = useParams();
     
     const { fetchFollowers, followers, followersLoading } = useFetchFollowers();
 
     useEffect(() => {
-        fetchFollowers(parms.userId);
+        fetchFollowers(params.userId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [params.userId]);
 
     return (
         <>
         {!followersLoading && 
-            <div className="text-white">
+            <>
                 {followers.length === 0 && <div className="text-center py-5 text-3xl font-bold">User has no followers</div>}
-                <div className="max-h-60 overflow-scroll">
+                <div className="">
                     {followers?.map((follower) => (
-                        <Link key={follower.id} className="border-4 border-white font-bold my-2 text-xl p-2 m-2 hover:cursor-pointer flex flex-row items-center justify-between" to={`/user/${follower.id}`}>
-                            <p >{"@" + follower.username}</p>
+                        <Link key={follower.id} className="border-2 border-white font-semibold text-xl mx-2 my-4 pl-4 p-2 flex flex-row items-center justify-between rounded-full hover:bg-gray-300/30" to={`/user/${follower.id}`}>
+                            <p >{follower.username}</p>
                             <button>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
+                                <img src="/src/assets/arrow.png" alt="arrow" className="h-7"/>
                             </button>
                         </Link>
                     ))}
                 </div>
-            </div>
+            </>
         }
         </>
     )

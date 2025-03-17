@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { CurrentUserContext } from "../../context/currentUserContext";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useLogin() {
     const { setCurrentUser, fetchCurrentUser } = useContext(CurrentUserContext)
     const nav = useNavigate();
     const loc = useLocation();
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError, setSuccess } = useContext(GlobalPopupContext);
 
     async function login(e, username, password) {
         e.preventDefault();
@@ -45,7 +45,8 @@ export function useLogin() {
                 setError(json);
                 return true;
             };
-    
+
+            setSuccess("login");
             await fetchCurrentUser();
             nav("/");
         } catch (error) {
@@ -65,7 +66,6 @@ export function useLogin() {
                 credentials: "include"
             });
     
-            await fetchCurrentUser();
             setCurrentUser(false);
             loc.pathname === "/" ? nav(0) : nav("/");
         } catch (error) {

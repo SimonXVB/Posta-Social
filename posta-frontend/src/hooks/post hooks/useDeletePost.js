@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { GlobalErrorContext } from "../../context/globalErrorContext";
+import { GlobalPopupContext } from "../../context/globalPopupContext";
 
 export function useDeletePost() {
-    const { setError } = useContext(GlobalErrorContext);
+    const { setError, setSuccess } = useContext(GlobalPopupContext);
 
     async function deletePost(postId, userId) {
         try {
@@ -22,6 +22,8 @@ export function useDeletePost() {
             if(json === "internalError") {
                 setError(json);
             };
+
+            setSuccess("postDeleted");
         } catch (error) {
             console.error(error);
             setError("fetchError");
