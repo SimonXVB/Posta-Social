@@ -14,7 +14,7 @@ async function createUser(req, res) {
             return res.status(400).json("length");
         };
 
-        const hash = bcrypt.hashSync(password, 15);
+        const hash = bcrypt.hashSync(password, 10);
 
         await userQueries.createUserDB(username, hash);
 
