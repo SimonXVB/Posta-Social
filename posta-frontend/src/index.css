@@ -28,6 +28,10 @@ body {
     animation: pop-in 150ms;
 }
 
+#spinner {
+    animation: spinner 1150ms linear infinite;
+}
+
 @keyframes pop-in {
     from {
         opacity: 0;
@@ -43,5 +47,14 @@ body {
     }
     to {
         right: 16px;
+    }
+}
+
+@keyframes spinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }

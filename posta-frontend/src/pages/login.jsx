@@ -10,6 +10,7 @@ export function Login() {
     const [loginPW, setLoginPW] = useState("");
     const [registerUser, setRegisterUser] = useState("");
     const [registerPW, setRegisterPW] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const { login } = useLogin();
     const { register } = useRegister();
@@ -17,16 +18,15 @@ export function Login() {
     const { currentUser, currentUserLoading } = useContext(CurrentUserContext);
 
     async function log(e) {
-        const error = await login(e, loginUser, loginPW);
-
-        if(!error) {
-            setRegisterUser("");
-            setRegisterPW("");
-        };
+        setLoading(true);
+        await login(e, loginUser, loginPW);
+        setLoading(false);
     };
 
     async function reg(e) {
+        setLoading(true);
         const error = await register(e, registerUser, registerPW);
+        setLoading(false);
 
         if(!error) {
             setRegisterUser("");
@@ -40,9 +40,14 @@ export function Login() {
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUserLoading]);
-    
+
     return (
         <div className="flex flex-col justify-center items-center my-auto py-10">
+            {loading && 
+                <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-gray-300/30" id="modal">
+                    <img src="/spinner.png" alt="spinner" id="spinner"/>
+                </div>
+            }
             {!currentUserLoading &&
             <>
             <div className="mb-10">
@@ -75,7 +80,7 @@ export function Login() {
                 <form onSubmit={e => reg(e)} className="bg-gray-900 p-6 rounded-3xl shadow-md shadow-blue-500">
                     <h1 className="text-2xl font-bold">Register</h1>
                     <Input name={"Username:"} onChange={e => setRegisterUser(e.target.value)} value={registerUser}/>
-                    <div className="text-sm -translate-y-2">{registerUser.length} / 25</div>
+                    <div className="text-sm">{registerUser.length} / 25</div>
                     <Input name={"Password:"} onChange={e => setRegisterPW(e.target.value)} value={registerPW}/>
                     <button type="submit" className="py-2 px-6 w-full bg-blue-500 rounded-full hover:bg-orange-500 font-semibold">Register</button>
                 </form>
