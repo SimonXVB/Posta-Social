@@ -41,12 +41,12 @@ export function Comment({ currentUser, comment, deleteComment }) {
                         <>
                             {isLiked &&
                                 <button onClick={() => unlike(currentUser.id, comment.id)} className="hover:bg-red-500">
-                                    <img src="/src/assets/unlike.png" alt="unlike" className="h-6"/>
+                                    <img src="/unlike.png" alt="unlike" className="h-6"/>
                                 </button>
                             }
                             {!isLiked &&
                                 <button onClick={() => like(currentUser.id, comment.id)} className="hover:bg-red-500">
-                                    <img src="/src/assets/like.png" alt="like" className="h-6"/>
+                                    <img src="/like.png" alt="like" className="h-6"/>
                                 </button>
                             }
                         </>

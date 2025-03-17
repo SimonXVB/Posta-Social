@@ -84,7 +84,7 @@ export function Login() {
             }
             <div className="mt-10">
                 <a href="https://github.com/SimonXVB/Posta-Social" target="_blank" className="font-semibold p-2 rounded-full text-2xl flex items-center hover:bg-gray-500/40">
-                    <img src="src/assets/github.png" className="h-9 mr-4" alt="Github Logo"/>
+                    <img src="/github.png" className="h-9 mr-4" alt="Github Logo"/>
                     GitHub Repo
                 </a>
             </div>

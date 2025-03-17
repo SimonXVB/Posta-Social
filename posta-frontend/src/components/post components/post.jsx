@@ -41,22 +41,22 @@ export function Post({ currentUser, post, deletePost }) {
                         <>
                             {isLiked &&
                                 <button onClick={() => unlike(currentUser.id, post.id)} className="hover:bg-red-500">
-                                    <img src="/src/assets/unlike.png" alt="unlike" className="h-6"/>
+                                    <img src="/unlike.png" alt="unlike" className="h-6"/>
                                 </button>
                             }
                             {!isLiked &&
                                 <button onClick={() => like(currentUser.id, post.id)} className="hover:bg-red-500">
-                                    <img src="/src/assets/like.png" alt="like" className="h-6"/>
+                                    <img src="/like.png" alt="like" className="h-6"/>
                                 </button>
                             }
                         </>
                     }
                     <Link to={`/post/${post.id}`} className="hover:bg-yellow-500">
-                        <img src="/src/assets/comment.png" alt="comment" className="h-6"/>
+                        <img src="/comment.png" alt="comment" className="h-6"/>
                     </Link>
                     {currentUser && currentUser.id === post.author.id &&
                         <button onClick={() => setDelModal(true)} className="hover:bg-blue-500">
-                            <img src="/src/assets/delete.png" alt="delete" className="h-6"/>
+                            <img src="/delete.png" alt="delete" className="h-6"/>
                         </button>
                     }
                 </div>

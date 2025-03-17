@@ -22,7 +22,7 @@ export function Followers() {
                         <Link key={follower.id} className="border-2 border-white font-semibold text-xl mx-2 my-4 pl-4 p-2 flex flex-row items-center justify-between rounded-full hover:bg-gray-300/30" to={`/user/${follower.id}`}>
                             <p >{follower.username}</p>
                             <button>
-                                <img src="/src/assets/arrow.png" alt="arrow" className="h-7"/>
+                                <img src="/arrow.png" alt="arrow" className="h-7"/>
                             </button>
                         </Link>
                     ))}

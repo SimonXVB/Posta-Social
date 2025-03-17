@@ -32,7 +32,7 @@ export function SuccessPopUp() {
                 <div className="fixed top-4 right-4 p-3 py-2 bg-green-500 flex justify-center items-center rounded-full">
                     <p className="font-bold text-xl mr-2">{successObj[success] || "Success"}</p>
                     <button onClick={() => {setSuccess(""); clearTimeout(timeoutRef.current)}} className="hover:bg-gray-300/30 rounded-full">
-                        <img src="/src/assets/close.png" alt="close" className="h-7"/>
+                        <img src="/close.png" alt="close" className="h-7"/>
                     </button>
                 </div>
             }
