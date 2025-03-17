@@ -38,7 +38,8 @@ export function FindModal({ setModal }) {
                     <div className="mx-2">
                         <Input name={"Search"} onChange={(e) => filter(e)}/>
                         <div className="max-h-80 overflow-auto">
-                            {returnIsFiltered().map((user) => (
+                            {allUsers.length === 0 && <div className="mt-4 text-3xl font-bold text-center">Nobody here</div>}
+                            {allUsers.length > 0 && returnIsFiltered().map((user) => (
                                 <Link key={user.id} className="border-2 border-white font-semibold text-xl my-4 pl-4 p-2 flex flex-row items-center justify-between rounded-full hover:bg-gray-300/30" to={`/user/${user.id}`}>
                                     <p>{user.username}</p>
                                     <button>

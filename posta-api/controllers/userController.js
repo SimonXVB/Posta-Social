@@ -93,6 +93,10 @@ async function getCurrentUser(req, res) {
         if(token) {
             const jwtUser = jwt.verify(token, process.env.SECRET);
             const user = await userQueries.getUserDB(jwtUser.userId);
+
+            if(user === null) {
+                return res.status(200).clearCookie("token").json("logout");
+            };
     
             return res.status(200).json(user);
         } else {

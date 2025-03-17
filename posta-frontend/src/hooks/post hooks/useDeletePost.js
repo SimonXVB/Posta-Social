@@ -21,6 +21,7 @@ export function useDeletePost() {
 
             if(json === "internalError") {
                 setError(json);
+                return;
             };
 
             setSuccess("postDeleted");

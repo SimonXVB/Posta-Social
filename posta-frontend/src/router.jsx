@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router";
 import { Login } from "./pages/login";
 import { useFetchCurrentUser } from "./hooks/user hooks/useFetchCurrentUser";
 import { useEffect } from "react";
@@ -8,6 +8,8 @@ import { CurrentPost } from "./pages/currentPost";
 import { CurrentContext } from "./context/currentUserContext";
 import { ErrorPopUp } from "./components/individual components/errorPopup";
 import { SuccessPopUp } from "./components/individual components/successPopup";
+import { ErrorBoundary } from "./context/errorBoundary";
+import { Fallback } from "./pages/fallback";
 import { Home } from "./pages/home";
 
 export function Router() {
@@ -21,13 +23,15 @@ export function Router() {
     return (
         <CurrentContext value={{setCurrentUser, fetchCurrentUser, currentUser, currentUserLoading}}>
             <BrowserRouter>
-                <Routes>
-                    <Route path="*" element={<NotFound />}/>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/login" element={!currentUser ? <Login /> : <Navigate to={"/"}/>}/>
-                    <Route path="/user/:userId" element={<Profile />}/>
-                    <Route path="/post/:postId" element={<CurrentPost />}/>
-                </Routes>
+                <ErrorBoundary fallback={<Fallback/>}>
+                    <Routes>
+                        <Route path="*" element={<NotFound />}/>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/login" element={<Login />}/>
+                        <Route path="/user/:userId" element={<Profile />}/>
+                        <Route path="/post/:postId" element={<CurrentPost />}/>
+                    </Routes>
+                </ErrorBoundary>
             </BrowserRouter>
             <ErrorPopUp/>
             <SuccessPopUp/>

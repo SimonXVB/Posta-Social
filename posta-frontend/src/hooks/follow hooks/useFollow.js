@@ -21,6 +21,7 @@ export function useFollow() {
             
             if(json === "internalError") {
                 setError(json);
+                return;
             };
 
             setSuccess("followedUser");
@@ -47,6 +48,7 @@ export function useFollow() {
 
             if(json === "internalError") {
                 setError(json);
+                return;
             };
 
             setSuccess("unfollowedUser");

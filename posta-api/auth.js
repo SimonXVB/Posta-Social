@@ -6,7 +6,7 @@ function bodyAuth(req, res, next) {
 
         if(!token) {
             console.error("token unauthenticated");
-            return res.status(500).json("unauthenticated");
+            return res.status(500).json("internalError");
         };
         
         const user = jwt.verify(token, process.env.SECRET);
@@ -15,11 +15,11 @@ function bodyAuth(req, res, next) {
             next();
         } else {
             console.error("user unauthenticated");
-            return res.status(500).json("unauthenticated");
+            return res.status(500).json("internalError");
         };
     } catch (error) {
         console.error(error);
-        return res.status(500).json("unauthenticated");
+        return res.status(500).json("internalError");
     };
 };
 
@@ -29,7 +29,7 @@ function paramsAuth(req, res, next) {
 
         if(!token) {
             console.error("token unauthenticated")
-            return res.status(500).json("unauthenticated");
+            return res.status(500).json("internalError");
         };
         
         const user = jwt.verify(token, process.env.SECRET);
@@ -38,11 +38,11 @@ function paramsAuth(req, res, next) {
             next();
         } else {
             console.error("user unauthenticated")
-            return res.status(500).json("unauthenticated");
+            return res.status(500).json("internalError");
         };
     } catch (error) {
         console.error(error);
-        return res.status(500).json("unauthenticated");
+        return res.status(500).json("internalError");
     };
 };
 

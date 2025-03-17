@@ -21,6 +21,7 @@ export function useDeleteComment() {
 
             if(json === "internalError") {
                 setError(json);
+                return;
             };
 
             setSuccess("commentDeleted");
