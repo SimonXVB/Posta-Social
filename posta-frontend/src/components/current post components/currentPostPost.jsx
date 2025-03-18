@@ -4,6 +4,9 @@ import { useDeletePost } from "../../hooks/post hooks/useDeletePost";
 import { DeleteModal } from "../individual components/deleteModal";3
 import { useDateFormat } from "../../hooks/useDateFormat";
 import { useState } from "react";
+import likeImg from "../../assets/like.png";
+import unlikeImg from "../../assets/unlike.png";
+import deleteImg from "../../assets/delete.png";
 
 export function CurrentPostPost({ currentUser, post }) {
     const nav = useNavigate();
@@ -50,17 +53,17 @@ export function CurrentPostPost({ currentUser, post }) {
                         <>
                             {isLiked &&
                                 <button onClick={() => unlike(currentUser.id, post.id)} className="hover:bg-red-500">
-                                    <img src="/unlike.png" alt="unlike" className="h-6"/>
+                                    <img src={unlikeImg} alt="unlike" className="h-6"/>
                                 </button>
                             }
                             {!isLiked &&
                                 <button onClick={() => like(currentUser.id, post.id)} className="hover:bg-red-500">
-                                    <img src="/like.png" alt="like" className="h-6"/>
+                                    <img src={likeImg} alt="like" className="h-6"/>
                                 </button>
                             }
                             {currentUser.id === post.author.id &&
                             <button onClick={() => setDelModal(true)} className="hover:bg-blue-500">
-                                <img src="/delete.png" alt="delete" className="h-6"/>
+                                <img src={deleteImg} alt="delete" className="h-6"/>
                             </button>
                             }
                         </>

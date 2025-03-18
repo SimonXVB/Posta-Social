@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useFetchAllUsers } from "../../hooks/home hooks/useFetchAllUsers";
 import { Input } from "../individual components/input";
 import { Link } from "react-router";
+import arrow from "../../assets/arrow.png";
+import close from "../../assets/close.png";
 
 export function FindModal({ setModal }) {
     const { fetchAll, allUsers, allLoading } = useFetchAllUsers();
@@ -31,7 +33,7 @@ export function FindModal({ setModal }) {
                 <div className="flex justify-between mb-3">
                     <p className="text-2xl font-bold">Discover</p>
                     <button className="hover:bg-gray-300/30 rounded-full aspect-square" onClick={() => setModal(false)}>
-                        <img src="/close.png" alt="close" className="h-8"/>
+                        <img src={close} alt="close" className="h-8"/>
                     </button>
                 </div>
                 {!allLoading &&
@@ -43,7 +45,7 @@ export function FindModal({ setModal }) {
                                 <Link key={user.id} className="border-2 border-white font-semibold text-xl my-4 pl-4 p-2 flex flex-row items-center justify-between rounded-full hover:bg-gray-300/30" to={`/user/${user.id}`}>
                                     <p>{user.username}</p>
                                     <button>
-                                        <img src="/arrow.png" alt="arrow" className="h-8"/>
+                                        <img src={arrow} alt="arrow" className="h-8"/>
                                     </button>
                                 </Link>
                             ))}

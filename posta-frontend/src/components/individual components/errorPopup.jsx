@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef } from "react"
 import { GlobalPopupContext } from "../../context/globalPopupContext"
+import closeImg from "../../assets/close.png";
 
 export function ErrorPopUp() {
     const { setError, error } = useContext(GlobalPopupContext);
@@ -36,7 +37,7 @@ export function ErrorPopUp() {
                 <div className="fixed top-4 right-4 p-3 py-2 bg-red-500 flex justify-center items-center rounded-full" id="popup">
                     <p className="font-bold text-xl mr-2">{errorObj[error] || "An error occurred"}</p>
                     <button onClick={close} className="hover:bg-gray-300/30 rounded-full">
-                        <img src="/close.png" alt="close" className="h-7"/>
+                        <img src={closeImg} alt="close" className="h-7"/>
                     </button>
                 </div>
             }

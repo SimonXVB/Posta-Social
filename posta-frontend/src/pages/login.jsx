@@ -4,6 +4,8 @@ import { useLogin } from "../hooks/user hooks/useLogin";
 import { useRegister } from "../hooks/user hooks/useRegister";
 import { Link, useNavigate } from "react-router";
 import { CurrentUserContext } from "../context/currentUserContext";
+import spinner from "../assets/spinner.png";
+import github from "../assets/github.png";
 
 export function Login() {
     const [loginUser, setLoginUser] = useState("");
@@ -45,7 +47,7 @@ export function Login() {
         <div className="flex flex-col justify-center items-center my-auto py-10">
             {loading && 
                 <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-gray-300/30" id="modal">
-                    <img src="/spinner.png" alt="spinner" id="spinner"/>
+                    <img src={spinner} alt="spinner" id="spinner"/>
                 </div>
             }
             {!currentUserLoading &&
@@ -89,7 +91,7 @@ export function Login() {
             }
             <div className="mt-10">
                 <a href="https://github.com/SimonXVB/Posta-Social" target="_blank" className="font-semibold p-2 rounded-full text-2xl flex items-center hover:bg-gray-500/40">
-                    <img src="/github.png" className="h-9 mr-4" alt="Github Logo"/>
+                    <img src={github} className="h-9 mr-4" alt="Github Logo"/>
                     GitHub Repo
                 </a>
             </div>

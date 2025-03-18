@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { CurrentUserContext } from "../../context/currentUserContext";
 import { useCreatePost } from "../../hooks/post hooks/useCreatePost";
+import add from "../../assets/add.png";
 
 export function CreatePost({ fetchPosts }) {
     const [postModal, setPostModal] = useState(false);
@@ -24,7 +25,7 @@ export function CreatePost({ fetchPosts }) {
     return (
         <>
             <button className="absolute bottom-6 right-6 p-2 rounded-full bg-gradient-to-r from-blue-500/50 to-red-500/50 hover:from-blue-500/20 hover:to-red-500/20" onClick={() => setPostModal(true)}>
-                <img src="/add.png" alt="add" className="h-10"/>
+                <img src={add} alt="add" className="h-10"/>
             </button>
             {postModal && 
                 <div className="fixed top-0 left-0 flex justify-center items-center h-screen w-screen bg-gray-300/30" id="modal">

@@ -3,6 +3,10 @@ import { useLikeComment } from "../../hooks/comment hooks/useLikeComment";
 import { useState } from "react";
 import { DeleteModal } from "../individual components/deleteModal";
 import { useDateFormat } from "../../hooks/useDateFormat";
+import likeImg from "../../assets/like.png";
+import unlikeImg from "../../assets/unlike.png";
+import commentImg from "../../assets/comment.png";
+import deleteImg from "../../assets/delete.png";
 
 export function Comment({ currentUser, comment, deleteComment }) {
     const [isLiked, setIsLiked] = useState(comment.isLiked);
@@ -41,22 +45,22 @@ export function Comment({ currentUser, comment, deleteComment }) {
                         <>
                             {isLiked &&
                                 <button onClick={() => unlike(currentUser.id, comment.id)} className="hover:bg-red-500">
-                                    <img src="/unlike.png" alt="unlike" className="h-6"/>
+                                    <img src={unlikeImg} alt="unlike" className="h-6"/>
                                 </button>
                             }
                             {!isLiked &&
                                 <button onClick={() => like(currentUser.id, comment.id)} className="hover:bg-red-500">
-                                    <img src="/like.png" alt="like" className="h-6"/>
+                                    <img src={likeImg} alt="like" className="h-6"/>
                                 </button>
                             }
                         </>
                     }
                     <Link to={`/post/${comment.postId}`} className="hover:bg-yellow-500">
-                        <img src="/src/assets/comment.png" alt="comment" className="h-6"/>
+                        <img src={commentImg} alt="comment" className="h-6"/>
                     </Link>
                     {currentUser && currentUser.id === comment.author.id &&
                         <button onClick={() => setDelModal(true)} className="hover:bg-blue-500">
-                            <img src="/src/assets/delete.png" alt="delete" className="h-6"/>
+                            <img src={deleteImg} alt="delete" className="h-6"/>
                         </button>
                     }
                 </div>
