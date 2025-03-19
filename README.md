@@ -29,4 +29,4 @@ Because I'm using a free web-service, the backend will spin down after a while, 
 ### Notes
 - JWTs/Cookies expire after 24 hours
 - This is mainly a portfolio project
-- Enjoy :)
+- Feel free to leave a message and enjoy :)
