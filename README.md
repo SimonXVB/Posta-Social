@@ -1,8 +1,10 @@
 # Posta Social
 
-This repo contains the frontend/backend code for my social media app "Posta Social".
+This repo contains the frontend/backend code for my social media app "Posta Social"
 
-Site available at https://social.simondev.xyz (active)
+Site available at https://social.simondev.xyz (active)  
+
+Because I'm using a free web-service, the backend will spin down after a while, which can delay requests by 50 seconds or more
 
 ## Features
 
@@ -26,6 +28,5 @@ Site available at https://social.simondev.xyz (active)
 
 ### Notes
 - JWTs/Cookies expire after 24 hours
-- Because I'm using a free web-service, the backend will spin down after a while, which can delay requests by 50 seconds or more
 - This is mainly a portfolio project
-- Enjoy :)
+- Feel free to leave a message and enjoy :)
