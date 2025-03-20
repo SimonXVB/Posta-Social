@@ -1,4 +1,4 @@
-import { Link } from "react-router"
+import { Link, useLocation } from "react-router"
 import { useLikePost } from "../../hooks/post hooks/useLikePost";
 import { useState } from "react";
 import { DeleteModal } from "../individual components/deleteModal";
@@ -10,10 +10,12 @@ import deleteImg from "../../assets/delete.png";
 
 
 export function Post({ currentUser, post, deletePost }) {
-    const { likePost, unlikePost } = useLikePost();
+    const loc = useLocation();
+
     const [isLiked, setIsLiked] = useState(post.isLiked);
     const [delModal, setDelModal] = useState(false);
 
+    const { likePost, unlikePost } = useLikePost();
     const { formatDate } = useDateFormat();
 
     async function like(userId, postId) {
@@ -56,9 +58,11 @@ export function Post({ currentUser, post, deletePost }) {
                             }
                         </>
                     }
-                    <Link to={`/post/${post.id}`} className="hover:bg-yellow-500">
-                        <img src={commentImg} alt="comment" className="h-6"/>
-                    </Link>
+                    {loc.pathname.split("/")[1] !== "post" &&
+                        <Link to={`/post/${post.id}`} className="hover:bg-yellow-500">
+                            <img src={commentImg} alt="comment" className="h-6"/>
+                        </Link>
+                    }
                     {currentUser && currentUser.id === post.author.id &&
                         <button onClick={() => setDelModal(true)} className="hover:bg-blue-500">
                             <img src={deleteImg} alt="delete" className="h-6"/>

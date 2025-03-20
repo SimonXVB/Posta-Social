@@ -3,12 +3,15 @@ import { useLikeComment } from "../../hooks/comment hooks/useLikeComment";
 import { useState } from "react";
 import { DeleteModal } from "../individual components/deleteModal";
 import { useDateFormat } from "../../hooks/useDateFormat";
+import { useLocation } from "react-router";
 import likeImg from "../../assets/like.png";
 import unlikeImg from "../../assets/unlike.png";
 import commentImg from "../../assets/comment.png";
 import deleteImg from "../../assets/delete.png";
 
 export function Comment({ currentUser, comment, deleteComment }) {
+    const loc = useLocation();
+
     const [isLiked, setIsLiked] = useState(comment.isLiked);
     const [delModal, setDelModal] = useState(false);
 
@@ -55,9 +58,11 @@ export function Comment({ currentUser, comment, deleteComment }) {
                             }
                         </>
                     }
-                    <Link to={`/post/${comment.postId}`} className="hover:bg-yellow-500">
-                        <img src={commentImg} alt="comment" className="h-6"/>
-                    </Link>
+                    {loc.pathname.split("/")[1] !== "post" &&
+                        <Link to={`/post/${comment.postId}`} className="hover:bg-yellow-500">
+                            <img src={commentImg} alt="comment" className="h-6"/>
+                        </Link>
+                    }
                     {currentUser && currentUser.id === comment.author.id &&
                         <button onClick={() => setDelModal(true)} className="hover:bg-blue-500">
                             <img src={deleteImg} alt="delete" className="h-6"/>

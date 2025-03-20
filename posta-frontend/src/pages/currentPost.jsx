@@ -1,16 +1,18 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { useFetchPost } from "../hooks/post hooks/useFetchPost"
-import { CurrentPostPost } from "../components/current post components/currentPostPost";
 import { CurrentUserContext } from "../context/currentUserContext";
-import { CurrentPostComment } from "../components/current post components/currentPostComment";
 import { useDeleteComment } from "../hooks/comment hooks/useDeleteComment";
+import { useDeletePost } from "../hooks/post hooks/useDeletePost";
 import { useCreateComment } from "../hooks/comment hooks/useCreateComment";
 import { useFetchPostComments } from "../hooks/comment hooks/useFetchPostComments";
 import { Navbar } from "../components/navbar/navbar";
+import { Post } from "../components/post components/post";
+import { Comment } from "../components/comment components/comment";
 
 export function CurrentPost() {
     const params = useParams();
+    const nav = useNavigate();
 
     const [commentContent, setCommentContent] = useState("");
 
@@ -19,6 +21,7 @@ export function CurrentPost() {
     const { currentUser } = useContext(CurrentUserContext);
     const { deleteComment } = useDeleteComment();
     const { createComment } = useCreateComment();
+    const { deletePost } = useDeletePost();
 
     async function create(e, userId, content, postId) {
         const error = await createComment(e, userId, content, postId);
@@ -29,7 +32,12 @@ export function CurrentPost() {
         };
     };
 
-    async function deleteCommentFunction(commendId, currentUserId) {
+    async function deleteCurrentPost() {
+        await deletePost(post.id, currentUser.id); 
+        nav("/");
+    };
+
+    async function deleteCurrentComment(commendId, currentUserId) {
         await deleteComment(commendId, currentUserId);
         await fetchPostComments(params.postId);  
     };
@@ -50,7 +58,7 @@ export function CurrentPost() {
                 <div className="relative flex flex-col max-w-[500px] w-full" id="border">
                     <Navbar currentUser={currentUser}/>
                     <div className="overflow-auto">
-                        <CurrentPostPost currentUser={currentUser} post={post}/>
+                        <Post currentUser={currentUser} post={post} deletePost={deleteCurrentPost}/>
                         {currentUser &&
                             <div className="pb-5">
                                 <form onSubmit={e => create(e, currentUser.id, commentContent, post.id)} className="p-5 pb-0 flex flex-row border-t-[1px] border-white/30">
@@ -65,7 +73,7 @@ export function CurrentPost() {
                             <div className="px-4 mb-4">
                                 {comments.length === 0 && <div className="text-center text-2xl font-bold m-5 text-white">Nothing to see here</div>}
                                 {comments?.map((comment) => (
-                                    <CurrentPostComment currentUser={currentUser} comment={comment} deleteComment={() => deleteCommentFunction(comment.id, currentUser.id)} key={comment.id}/>
+                                    <Comment currentUser={currentUser} comment={comment} deleteComment={deleteCurrentComment} key={comment.id}/>
                                 ))}
                             </div>
                         }
