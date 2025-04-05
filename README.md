@@ -2,10 +2,6 @@
 
 This repo contains the frontend/backend code for my social media app "Posta Social"
 
-Site available at https://social.simondev.xyz (active)  
-
-Because I'm using a free web-service, the backend will spin down after a while, which can delay requests by 50 seconds or more
-
 ## Features
 
 ### User related features
