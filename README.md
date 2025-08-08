@@ -27,4 +27,3 @@ This repo contains the frontend/backend code for my social media app "Posta Soci
 ### Notes
 - JWTs/Cookies expire after 24 hours
 - This is mainly a portfolio project
-- Feel free to leave a message and enjoy :)
