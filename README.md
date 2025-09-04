@@ -1,4 +1,4 @@
-<img width="500" height="500" alt="posta-logo" src="https://github.com/user-attachments/assets/7d21cd19-e7be-4bc1-a72f-222d2b28e8ec" />
+<img width="350" height="350" alt="posta-logo" src="https://github.com/user-attachments/assets/7d21cd19-e7be-4bc1-a72f-222d2b28e8ec" />
 
 # Posta Social
 
