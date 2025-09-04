@@ -4,6 +4,19 @@
 
 This repo contains the frontend/backend code for my social media app "Posta Social"
 
+# How to run locally
+
+> [!NOTE]
+> **NodeJS and NPM are required!**
+
+**1. Enter a valid PostgreSQL Database URL in `/posta-api/.env --> DATABASE_URL` (the DB should be emtpy)**  
+**2. Run `npx prisma migrate dev --name init` in `/posta-api`**  
+**3. Run `node app.js` in "/posta-api" to start up the server**  
+**4. Run `npm run dev` in "/posta-frontend" to start up the frontend**  
+**5. You're done!**
+
+If you are having issues with setting up the DB, please consult the [Prisma Postgres Starter Guide](https://www.prisma.io/docs/getting-started/quickstart-prismaPostgres).
+
 ## Features
 
 ### User related features
