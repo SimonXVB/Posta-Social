@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
-    origin: process.env.PORT, 
+    origin: "http://localhost:5173", 
 }));
 app.use(userRouter);
 app.use(followingRouter);
