@@ -1,10 +1,21 @@
+<img width="350" height="350" alt="posta-logo" src="https://github.com/user-attachments/assets/7d21cd19-e7be-4bc1-a72f-222d2b28e8ec" />
+
 # Posta Social
 
 This repo contains the frontend/backend code for my social media app "Posta Social"
 
-Site available at https://social.simondev.xyz (active)  
+# How to run locally
 
-Because I'm using a free web-service, the backend will spin down after a while, which can delay requests by 50 seconds or more
+> [!NOTE]
+> **NodeJS and NPM are required!**
+
+**1. Enter a valid PostgreSQL Database URL in `/posta-api/.env --> DATABASE_URL` (the DB should be emtpy)**  
+**2. Run `npx prisma migrate dev --name init` in `/posta-api`**  
+**3. Run `node app.js` in "/posta-api" to start up the server**  
+**4. Run `npm run dev` in "/posta-frontend" to start up the frontend**  
+**5. You're done!**
+
+If you are having issues with setting up the DB, please consult the [Prisma Postgres Starter Guide](https://www.prisma.io/docs/getting-started/quickstart-prismaPostgres).
 
 ## Features
 
@@ -29,4 +40,3 @@ Because I'm using a free web-service, the backend will spin down after a while, 
 ### Notes
 - JWTs/Cookies expire after 24 hours
 - This is mainly a portfolio project
-- Feel free to leave a message and enjoy :)
